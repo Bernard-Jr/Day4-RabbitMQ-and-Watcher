@@ -35,3 +35,12 @@ Meteor.startup(async () => {
     return LinksCollection.find();
   });
 });
+
+// Import Meteor methods for RabbitMQ producer
+import './methods.js';
+
+// Publish messages collection for UI
+import { Messages } from '../imports/api/messages';
+Meteor.publish('messages', function () {
+  return Messages.find();
+});
