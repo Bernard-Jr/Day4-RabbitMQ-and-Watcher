@@ -24,3 +24,12 @@ Use this checklist to track your progress while working through the RabbitMQ wor
 
 ---
 Add notes or check off each item as you complete it. Update this file regularly to keep your hands-on work organized and visible.
+
+## Watcher for Publications and Method Calls Demo Tasks
+- [ ] Create a new tab/section in the app for Watcher Actions demo
+- [ ] Configure Watcher to listen for specific database changes and trigger a publication
+- [ ] Use Watcher to call a Meteor method based on real-time events
+- [ ] Ensure reactivity flows smoothly from database changes to the client UI
+- [ ] Implement a Watcher to call a method that modifies another collection or logs an event
+- [ ] Test and verify that all triggered updates propagate correctly to the client
+- [ ] Save progress with git after each major step

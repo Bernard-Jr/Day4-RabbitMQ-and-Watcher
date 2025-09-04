@@ -1,6 +1,20 @@
+// Server-side Watcher: Log every new event added to Events
+Meteor.startup(() => {
+  Events.find().observe({
+    added: function (doc) {
+      ActionLogs.insert({
+        text: `Event added: ${doc.text || JSON.stringify(doc)}`,
+        createdAt: new Date(),
+        eventId: doc._id
+      });
+    }
+  });
+});
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { LinksCollection } from '/imports/api/links';
 import { Events } from '/imports/api/events';
+import { ActionLogs } from '../imports/api/action_logs';
 
 async function insertLink({ title, url }) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
@@ -39,10 +53,24 @@ Meteor.startup(async () => {
   Meteor.publish("events", function () {
     return Events.find({}, { sort: { createdAt: -1 } });
   });
+
+  // Publish action logs for Watcher Actions Demo
+  Meteor.publish("action_logs", function () {
+    return ActionLogs.find({}, { sort: { createdAt: -1 } });
+  });
 });
 
 // Import Meteor methods for RabbitMQ producer
 import './methods.js';
+
+// Meteor method to log actions
+Meteor.methods({
+  'log.action'(logData) {
+    check(logData, Object);
+    logData.createdAt = new Date();
+    return ActionLogs.insert(logData);
+  }
+});
 
 
 import { Mongo } from 'meteor/mongo';

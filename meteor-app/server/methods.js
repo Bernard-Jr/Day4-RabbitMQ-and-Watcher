@@ -13,7 +13,7 @@ Meteor.methods({
     // Optionally validate required fields, e.g. eventData.name, eventData.type, etc.
       try {
         eventData.createdAt = new Date();
-        const result = Events.insertAsync(eventData);
+  const result = Events.insert(eventData);
         return result;
       } catch (error) {
         throw new Meteor.Error('events-add-failed', error.message || 'Unknown error');
@@ -21,6 +21,6 @@ Meteor.methods({
   },
     'events.clear'() {
       // Remove all events from the collection
-      return Events.removeAsync({});
+  return Events.remove({});
     },
 });
