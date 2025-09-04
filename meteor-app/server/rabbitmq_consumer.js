@@ -2,7 +2,7 @@
 const amqp = require('amqplib');
 const { MongoClient } = require('mongodb');
 
-const MONGO_URL = 'mongodb://localhost:3001/meteor'; // Default Meteor MongoDB
+const MONGO_URL = 'mongodb://localhost:4001/meteor'; // Default Meteor MongoDB
 const QUEUE = 'test-queue';
 
 async function startConsumer() {
