@@ -4,6 +4,8 @@ This project demonstrates RabbitMQ producer-consumer patterns and Meteor integra
 - Basic producer-consumer messaging
 - Work queue with multiple consumers and message persistence
 - Real-time UI updates using Meteor and React
+- Watcher Demo: live event feed using Meteor reactivity
+- Watcher Actions Demo: logging actions and watcher-triggered events
 
 ## How to Run
 
@@ -33,14 +35,23 @@ This project demonstrates RabbitMQ producer-consumer patterns and Meteor integra
 5. **View results:**
    - Open your browser to `http://localhost:3000`
    - Switch to the "Work Queue Demo" tab to see which consumer processed each message
+   - Switch to the "Watcher Demo" tab to see live event updates
+   - Switch to the "Watcher Actions Demo" tab to see all logged actions and watcher-triggered logs
 
 ## Features
 - Message persistence: tasks survive RabbitMQ restarts
-- Real-time UI: see processed tasks and consumer IDs
+- Real-time UI: see processed tasks, consumer IDs, and live event feeds
+- Watcher Demo: shows Meteor reactivity in functional components
+- Watcher Actions Demo: shows logging via Meteor methods and server-side watchers
 - Checklist and step-by-step guides included in the repo
 
-## Repo
-https://github.com/Bernard-Jr/Day4-RabbitMQ-and-Watcher.git
+## Save Progress
+To save your work and push to GitHub:
+```powershell
+git add .
+git commit -m "Update: completed RabbitMQ, Watcher Demo, and Actions Demo"
+git push
+```
 
 ---
 This is a temporary README. Update with more details as needed.
