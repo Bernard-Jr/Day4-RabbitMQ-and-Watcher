@@ -44,19 +44,6 @@ Meteor.startup(async () => {
 // Import Meteor methods for RabbitMQ producer
 import './methods.js';
 
-Meteor.methods({
-  'events.add'(text) {
-    check(text, String);
-    Events.insert({ text, createdAt: new Date() });
-  },
-  'events.remove'(id) {
-    check(id, String);
-    Events.remove(id);
-  },
-  'events.clear'() {
-    Events.remove({});
-  }
-});
 
 import { Mongo } from 'meteor/mongo';
 export const WorkQueueResults = new Mongo.Collection('work_queue_results');

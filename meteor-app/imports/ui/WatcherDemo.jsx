@@ -16,7 +16,7 @@ export default function WatcherDemo() {
   const addEvent = e => {
     e.preventDefault();
     if (input.trim()) {
-      Meteor.call('events.add', input.trim());
+    Meteor.call('events.add', { text: input.trim() });
       setInput('');
     }
   };
