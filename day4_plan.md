@@ -165,24 +165,72 @@ Learn how RabbitMQ handles different types of queues and message delivery throug
 **Why This Matters:**
 These exercises help you understand how RabbitMQ can balance workloads, ensure reliable delivery, and support different messaging patterns in real-world applications.
 
+
+### How and Where the Work Queue Demo is Applied in the App
+
+The work queue demo is implemented as a separate tab in the Meteor app UI. You can access it by clicking the "Work Queue Demo" tab at the top of the app.
+
+- **Producer Script:** `server/producer_work_queue.js` sends multiple persistent tasks to a RabbitMQ queue.
+- **Consumer Script:** `server/consumer_work_queue.js` runs in multiple terminals, each acting as a consumer and saving processed tasks (with consumer ID) to MongoDB.
+- **UI Integration:** The tab uses `imports/ui/WorkQueueDemo.jsx` and `imports/ui/WorkQueueResultsList.jsx` to display which consumer processed each message in real time.
+
+**How it works:**
+1. You send tasks using the producer script.
+2. Multiple consumers process tasks from the queue and save results to the database.
+3. The UI tab shows all processed tasks and which consumer handled each one.
+4. Message persistence is enabled, so tasks survive RabbitMQ restarts.
+
+This makes it easy to see load distribution and persistence in action, directly from your browser.
+
+---
+### Step-by-Step Guide: Testing the Work Queue Demo
+
+1. Open two or more terminals and run `node server/consumer_work_queue.js` in each to start multiple consumers.
+2. In another terminal, run `node server/producer_work_queue.js` to send tasks to the queue.
+3. Go to the "Work Queue Demo" tab in your app to see which consumer processed each task.
+4. To test persistence, stop all consumers, send tasks, restart RabbitMQ, then start consumers again and check that tasks are still processed.
+5. Save your progress with git after verifying persistence and UI updates.
+
 ---
 ## Afternoon Session (4 Hours)
 ### 3. Watcher Integration on Functional Components (2 Hours)
-- **Watcher Overview**
-  - Watcher observes changes in data or state and triggers updates in functional components.
-- **Integration Steps**
-  - Connect Watcher to a component's lifecycle.
-  - Use Watcher to monitor state changes or trigger updates (e.g., live feeds, dashboards).
-- **Hands-On**
-  - Integrate Watcher to monitor a data collection and react to changes dynamically.
+**Objective:**
+Learn how to use Watcher in React functional components for real-time monitoring and updates.
 
-### 4. Watcher for Publications & Method Calls (2 Hours)
-- **Using Watcher for Meteor Publications**
-  - Configure Watcher to listen for database changes and trigger publications to update clients in real time.
-- **Using Watcher for Method Calls**
-  - Set up Watcher to call Meteor methods based on events, ensuring reactivity from database to UI.
-- **Hands-On**
-  - Create a Watcher that pushes updated data to clients and calls methods to modify collections or log events.
+**Key Concepts:**
+- Watcher is a tool or pattern that observes changes in data or state.
+- In functional components, Watcher can be set up using hooks (like `useEffect` or custom hooks) to listen for changes and trigger updates.
+- This enables features like live feeds, dashboards, or any UI that needs to react instantly to data changes.
+
+**Hands-On Practice:**
+- Integrate Watcher into a functional component to monitor a data collection (e.g., a MongoDB collection).
+- When the data changes, Watcher triggers a UI update automatically.
+- Simulate data changes and observe the UI updating in real time.
+
+**Example Use Case:**
+- A dashboard that shows live updates from a database, such as new messages or sensor readings.
+
+---
+### Using Watcher for Publications and Method Calls (2 Hours)
+**Objective:**
+Use Watcher to trigger Meteor publications and method calls for seamless real-time data handling.
+
+**Key Concepts:**
+- Watcher can listen for specific database changes (like inserts, updates, or deletes).
+- When a change is detected, Watcher can trigger a Meteor publication to push new data to clients.
+- Watcher can also call Meteor methods to perform actions, such as updating another collection or logging events.
+- This ensures that changes in the database are immediately reflected in the client UI.
+
+**Hands-On Practice:**
+- Create a Watcher that monitors a collection and triggers a publication to update clients in real time.
+- Implement a Watcher that calls a Meteor method when an event occurs (e.g., a new document is added).
+- Test by making changes to the observed collection and verifying that updates reach the client instantly.
+
+**Example Use Case:**
+- A notification system that pushes alerts to users as soon as relevant data changes in the database.
+
+---
+These steps will help you understand and implement real-time reactivity in your Meteor app using Watcher patterns and Meteor's built-in reactivity features.
 
 ---
 ## Task List & Progress Tracker

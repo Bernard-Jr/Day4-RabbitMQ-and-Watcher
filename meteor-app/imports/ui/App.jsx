@@ -1,10 +1,12 @@
 
 
 
+
 import React, { useState } from 'react';
 import MessageForm from './MessageForm.jsx';
 import MessageList from './MessageList.jsx';
 import WorkQueueDemo from './WorkQueueDemo.jsx';
+import WatcherDemo from './WatcherDemo.jsx';
 
 export const App = () => {
   const [tab, setTab] = useState('main');
@@ -12,7 +14,8 @@ export const App = () => {
     <div style={{ maxWidth: 600, margin: '0 auto', padding: 40 }}>
       <nav style={{ marginBottom: 20 }}>
         <button onClick={() => setTab('main')} style={{ marginRight: 10, padding: '6px 16px', background: tab === 'main' ? '#e0e0e0' : '#fff' }}>Main Demo</button>
-        <button onClick={() => setTab('workqueue')} style={{ padding: '6px 16px', background: tab === 'workqueue' ? '#e0e0e0' : '#fff' }}>Work Queue Demo</button>
+        <button onClick={() => setTab('workqueue')} style={{ marginRight: 10, padding: '6px 16px', background: tab === 'workqueue' ? '#e0e0e0' : '#fff' }}>Work Queue Demo</button>
+        <button onClick={() => setTab('watcher')} style={{ padding: '6px 16px', background: tab === 'watcher' ? '#e0e0e0' : '#fff' }}>Watcher Demo</button>
       </nav>
       {tab === 'main' ? (
         <div>
@@ -31,8 +34,10 @@ export const App = () => {
             <MessageList />
           </section>
         </div>
-      ) : (
+      ) : tab === 'workqueue' ? (
         <WorkQueueDemo />
+      ) : (
+        <WatcherDemo />
       )}
     </div>
   );

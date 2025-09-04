@@ -13,4 +13,14 @@ Use this checklist to track your progress while working through the RabbitMQ wor
 - [x] Save progress with git after each major step
 
 ---
+
+## Watcher Integration Hands-On Tasks
+- [ ] Create a new tab/section in the app for Watcher demo
+- [ ] Integrate Watcher (reactive hook or subscription) into a functional component to monitor a data collection
+- [ ] Simulate changes to the observed data (e.g., add, update, or remove items)
+- [ ] Test that the UI updates in real time as data changes
+- [ ] Show a live feed or dashboard view in the UI
+- [ ] Save progress with git after each major step
+
+---
 Add notes or check off each item as you complete it. Update this file regularly to keep your hands-on work organized and visible.

@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { LinksCollection } from '/imports/api/links';
+import { Events } from '/imports/api/events';
 
 async function insertLink({ title, url }) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
@@ -30,14 +31,32 @@ Meteor.startup(async () => {
   }
 
   // We publish the entire Links collection to all clients.
-  // In order to be fetched in real-time to the clients
   Meteor.publish("links", function () {
     return LinksCollection.find();
+  });
+
+  // Publish all events for the Watcher demo
+  Meteor.publish("events", function () {
+    return Events.find({}, { sort: { createdAt: -1 } });
   });
 });
 
 // Import Meteor methods for RabbitMQ producer
 import './methods.js';
+
+Meteor.methods({
+  'events.add'(text) {
+    check(text, String);
+    Events.insert({ text, createdAt: new Date() });
+  },
+  'events.remove'(id) {
+    check(id, String);
+    Events.remove(id);
+  },
+  'events.clear'() {
+    Events.remove({});
+  }
+});
 
 import { Mongo } from 'meteor/mongo';
 export const WorkQueueResults = new Mongo.Collection('work_queue_results');
