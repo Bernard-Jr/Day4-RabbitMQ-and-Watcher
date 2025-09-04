@@ -39,6 +39,19 @@ Meteor.startup(async () => {
 // Import Meteor methods for RabbitMQ producer
 import './methods.js';
 
+import { Mongo } from 'meteor/mongo';
+export const WorkQueueResults = new Mongo.Collection('work_queue_results');
+
+Meteor.publish('work_queue_results', function () {
+  return WorkQueueResults.find({}, { sort: { processedAt: -1 } });
+});
+
+Meteor.methods({
+  'workQueueResults.get'() {
+    return WorkQueueResults.find({}, { sort: { processedAt: -1 } }).fetch();
+  }
+});
+
 // Publish messages collection for UI
 import { Messages } from '../imports/api/messages';
 Meteor.publish('messages', function () {
